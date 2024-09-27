@@ -1,0 +1,292 @@
+# [No.1] construct_wrapper.145
+# In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(372)/    def construct(self, *inputs):/
+funcgraph fg_145(
+        %para1 : Tensor(F32)[400]    # inputs0
+        , %para2 : Tensor(F32)[1]    # inputs1
+        , %para3 : Ref[Tensor(F32)][25, 400]    # 0.weight
+        , %para4 : Ref[Tensor(F32)][25]    # 0.bias
+        , %para5 : Ref[Tensor(F32)][15, 25]    # 1.weight
+        , %para6 : Ref[Tensor(F32)][15]    # 1.bias
+        , %para7 : Ref[Tensor(F32)][1, 15]    # 2.weight
+        , %para8 : Ref[Tensor(F32)][1]    # 2.bias
+        , %para9 : Ref[Tensor(F32)][1]    # beta1_power
+        , %para10 : Ref[Tensor(F32)][1]    # beta2_power
+        , %para11 : Ref[Tensor(F32)][25, 400]    # moment1.0.weight
+        , %para12 : Ref[Tensor(F32)][25]    # moment1.0.bias
+        , %para13 : Ref[Tensor(F32)][15, 25]    # moment1.1.weight
+        , %para14 : Ref[Tensor(F32)][15]    # moment1.1.bias
+        , %para15 : Ref[Tensor(F32)][1, 15]    # moment1.2.weight
+        , %para16 : Ref[Tensor(F32)][1]    # moment1.2.bias
+        , %para17 : Ref[Tensor(F32)][25, 400]    # moment2.0.weight
+        , %para18 : Ref[Tensor(F32)][25]    # moment2.0.bias
+        , %para19 : Ref[Tensor(F32)][15, 25]    # moment2.1.weight
+        , %para20 : Ref[Tensor(F32)][15]    # moment2.1.bias
+        , %para21 : Ref[Tensor(F32)][1, 15]    # moment2.2.weight
+        , %para22 : Ref[Tensor(F32)][1]    # moment2.2.bias
+        , %para23 : Ref[Tensor(F32)][]    # learning_rate
+        , %para24 : Ref[Tensor(I32)][1]    # global_step
+    ) {
+    %1 : Tuple[Tensor(F32)*2] = Primitive::MakeTuple{prim_type=1}(%para1, %para2)    #(Tensor(F32)[400], Tensor(F32)[1]) #scope: Default
+#[CNode]160
+
+#------------------------> 0
+    %2 = UnpackCall::unpack_call(FuncGraph::fg_161, %1)    #(Func, Tuple[Tensor(F32)*2])    # fg_161=construct.161 #scope: Default
+#[CNode]162
+    Primitive::Return{prim_type=1}(%2)    #(Undefined) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(378)/        return loss/#[CNode]163
+}
+# order:
+#   1: construct_wrapper.145:[CNode]162{[0]: ValueNode<UnpackCall> unpack_call.164, [1]: ValueNode<FuncGraph> construct.161, [2]: [CNode]160}
+#   2: construct_wrapper.145:[CNode]163{[0]: ValueNode<Primitive> Return, [1]: [CNode]162}
+
+
+# [No.2] UnpackCall.146
+
+funcgraph fg_146(
+        %para25 : Func    # 147
+        , %para26 : Tuple[Tensor(F32)*2]    # 148
+    ) {
+    %1 : Tensor(F32)[400] = Primitive::TupleGetItem{prim_type=1}(%para26, I64(0))    #(Tuple[Tensor(F32)*2], I64) #scope: Default
+#165
+    %2 : Tensor(F32)[1] = Primitive::TupleGetItem{prim_type=1}(%para26, I64(1))    #(Tuple[Tensor(F32)*2], I64) #scope: Default
+#166
+
+#------------------------> 1
+    %3 = %para25(%1, %2)    #(Tensor(F32)[400], Tensor(F32)[1]) #scope: Default
+#167
+    Primitive::Return{prim_type=1}(%3)    #(Undefined) #scope: Default
+#168
+}
+# order:
+#   1: UnpackCall.146:167{[0]: 147, [1]: 165, [2]: 166}
+#   2: UnpackCall.146:168{[0]: ValueNode<Primitive> Return, [1]: 167}
+
+
+# [No.3] construct.149
+# In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(372)/    def construct(self, *inputs):/
+funcgraph fg_149[fg_145](
+        %para27 : Tensor(F32)[400]    # inputs0
+        , %para28 : Tensor(F32)[1]    # inputs1
+    ) {
+    %1 : Tuple[Tensor(F32)*2] = Primitive::MakeTuple{prim_type=1}(%para27, %para28)    #(Tensor(F32)[400], Tensor(F32)[1]) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(372)/    def construct(self, *inputs):/#[CNode]169
+
+#------------------------> 2
+    %2 = UnpackCall::unpack_call(FuncGraph::fg_153, %1)    #(Func, Tuple[Tensor(F32)*2])    # fg_153=construct.153 #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(373)/        loss = self.network(*inputs)/#loss
+    %3 = Primitive::getattr{prim_type=1}(%2, "dtype")    #(Undefined, Undefined) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(374)/        sens = F.fill(loss.dtype, loss.shape, self.sens)/#[CNode]170
+    %4 = Primitive::getattr{prim_type=1}(%2, "shape")    #(Undefined, Undefined) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(374)/        sens = F.fill(loss.dtype, loss.shape, self.sens)/#[CNode]171
+    %5 = DoSignaturePrimitive::S-Prim-Fill{prim_type=1}(%3, %4, F32(1))    #(Undefined, Undefined, Undefined) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(374)/        sens = F.fill(loss.dtype, loss.shape, self.sens)/#sens
+    %6 = DoSignaturePrimitive::S-Prim-MakeTuple{prim_type=1}(%5)    #(Undefined) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(375)/        grads = self.grad(self.network, self.weights)(*inputs, sens)/#[CNode]172
+    %7 = UnpackGraphPrimitive::UnpackGraph{prim_type=1}(FuncGraph::fg_153, %1, %6)    #(Undefined, Tuple[Tensor(F32)*2], Undefined)    # fg_153=construct.153 #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(375)/        grads = self.grad(self.network, self.weights)(*inputs, sens)/#grads
+    %8 = Primitive::MakeTuple{prim_type=1}(%para3, %para4, %para5, %para6, %para7, %para8)    #(Ref[Tensor(F32)][25, 400], Ref[Tensor(F32)][25], Ref[Tensor(F32)][15, 25], Ref[Tensor(F32)][15], Ref[Tensor(F32)][1, 15], Ref[Tensor(F32)][1]) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(375)/        grads = self.grad(self.network, self.weights)(*inputs, sens)/#[CNode]173
+    %9 = DoSignaturePrimitive::S-Prim-grad{prim_type=1}(%7, %8)    #(Undefined, Undefined) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(375)/        grads = self.grad(self.network, self.weights)(*inputs, sens)/#grads
+    %10 = UnpackCall::unpack_call(%9, %1, %6)    #(Undefined, Tuple[Tensor(F32)*2], Undefined) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(375)/        grads = self.grad(self.network, self.weights)(*inputs, sens)/#grads
+    %11 = DoSignaturePrimitive::S-Prim-identity{prim_type=1}[side_effect_propagate=I64(1)](%10)    #(Undefined) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(376)/        grads = self.grad_reducer(grads)/#grads
+    %12 = FuncGraph::fg_174(%11)    #(Undefined)    # fg_174=construct.174 #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(377)/        loss = F.depend(loss, self.optimizer(grads))/#[CNode]175
+    %13 = DoSignaturePrimitive::S-Prim-Depend{prim_type=1}[side_effect_propagate=I64(1)](%2, %12)    #(Undefined, Undefined) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(377)/        loss = F.depend(loss, self.optimizer(grads))/#loss
+    Primitive::Return{prim_type=1}(%13)    #(Undefined) #scope: Default
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(378)/        return loss/#[CNode]176
+}
+# order:
+#   1: construct.149:loss{[0]: ValueNode<UnpackCall> unpack_call.177, [1]: ValueNode<FuncGraph> construct.153, [2]: [CNode]169}
+#   2: construct.149:[CNode]170{[0]: ValueNode<Primitive> getattr, [1]: loss, [2]: ValueNode<StringImm> dtype}
+#   3: construct.149:[CNode]171{[0]: ValueNode<Primitive> getattr, [1]: loss, [2]: ValueNode<StringImm> shape}
+#   4: construct.149:sens{[0]: ValueNode<DoSignaturePrimitive> S-Prim-Fill, [1]: [CNode]170, [2]: [CNode]171, [3]: ValueNode<FP32Imm> 1.000000}
+#   5: construct.149:[CNode]172{[0]: ValueNode<DoSignaturePrimitive> S-Prim-MakeTuple, [1]: sens}
+#   6: construct.149:grads{[0]: ValueNode<UnpackGraphPrimitive> UnpackGraph, [1]: ValueNode<FuncGraph> construct.153, [2]: [CNode]169, [3]: [CNode]172}
+#   7: construct.149:grads{[0]: ValueNode<DoSignaturePrimitive> S-Prim-grad, [1]: grads, [2]: [CNode]173}
+#   8: construct.149:grads{[0]: ValueNode<UnpackCall> unpack_call.178, [1]: grads, [2]: [CNode]169, [3]: [CNode]172}
+#   9: construct.149:grads{[0]: ValueNode<DoSignaturePrimitive> S-Prim-identity, [1]: grads}
+#  10: construct.149:[CNode]175{[0]: ValueNode<FuncGraph> construct.174, [1]: grads}
+#  11: construct.149:loss{[0]: ValueNode<DoSignaturePrimitive> S-Prim-Depend, [1]: loss, [2]: [CNode]175}
+#  12: construct.149:[CNode]176{[0]: ValueNode<Primitive> Return, [1]: loss}
+
+
+# [No.4] UnpackCall.150
+
+funcgraph fg_150(
+        %para29 : Func    # 151
+        , %para30 : Tuple[Tensor(F32)*2]    # 152
+    ) {
+    %1 : Tensor(F32)[400] = Primitive::TupleGetItem{prim_type=1}(%para30, I64(0))    #(Tuple[Tensor(F32)*2], I64) #scope: Default
+#179
+    %2 : Tensor(F32)[1] = Primitive::TupleGetItem{prim_type=1}(%para30, I64(1))    #(Tuple[Tensor(F32)*2], I64) #scope: Default
+#180
+
+#------------------------> 3
+    %3 = %para29(%1, %2)    #(Tensor(F32)[400], Tensor(F32)[1]) #scope: Default
+#181
+    Primitive::Return{prim_type=1}(%3)    #(Undefined) #scope: Default
+#182
+}
+# order:
+#   1: UnpackCall.150:181{[0]: 151, [1]: 179, [2]: 180}
+#   2: UnpackCall.150:182{[0]: ValueNode<Primitive> Return, [1]: 181}
+
+
+# [No.5] construct.153
+# In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(110)/    def construct(self, data, label):/
+funcgraph fg_153[fg_145](
+        %para31 : Tensor(F32)[400]    # data
+        , %para32 : Tensor(F32)[1]    # label
+    ) {
+
+#------------------------> 4
+    %1 = FuncGraph::fg_154(%para31)    #(Tensor(F32)[400])    # fg_154=construct.154 #scope: Default/network-WithLossCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(111)/        out = self._backbone(data)/#out
+    %2 = FuncGraph::fg_183(%1, %para32)    #(Undefined, Tensor(F32)[1])    # fg_183=construct.183 #scope: Default/network-WithLossCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(112)/        return self._loss_fn(out, label)/#[CNode]184
+    Primitive::Return{prim_type=1}(%2)    #(Undefined) #scope: Default/network-WithLossCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/wrap/cell_wrapper.py(112)/        return self._loss_fn(out, label)/#[CNode]185
+}
+# order:
+#   1: construct.153:out{[0]: ValueNode<FuncGraph> construct.154, [1]: data}
+#   2: construct.153:[CNode]184{[0]: ValueNode<FuncGraph> construct.183, [1]: out, [2]: label}
+#   3: construct.153:[CNode]185{[0]: ValueNode<Primitive> Return, [1]: [CNode]184}
+
+
+# [No.6] construct.154
+# In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(274)/    def construct(self, input_data):/
+funcgraph fg_154[fg_145](
+        %para33 : Tensor(F32)[400]    # input_data
+    ) {
+
+#------------------------> 5
+    %1 = FuncGraph::fg_155(I64(0), %para33)    #(I64, Tensor(F32)[400])    # fg_155=⤾construct.155 #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]186
+    Primitive::Return{prim_type=1}(%1)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]187
+}
+# order:
+#   1: construct.154:[CNode]188{[0]: ValueNode<FuncGraph> ms_len.189, [1]: [CNode]190}
+#   2: construct.154:[CNode]186{[0]: ValueNode<FuncGraph> ⤾construct.155, [1]: ValueNode<Int64Imm> 0, [2]: input_data}
+#   3: construct.154:[CNode]187{[0]: ValueNode<Primitive> Return, [1]: [CNode]186}
+
+
+# [No.7] ⤾construct.155
+# In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/
+funcgraph fg_155[fg_154](
+        %para34 : I64    # @[CNode]156
+        , %para35 : Tensor(F32)[400]    # Φinput_data
+    ) {
+    %1 : $(construct.154):Tuple[Func*3] = Primitive::MakeTuple{prim_type=1}(FuncGraph::fg_158, FuncGraph::fg_191, FuncGraph::fg_192)    #(Func, Func, Func)    # fg_158=construct.158, fg_191=construct.191, fg_192=construct.192 #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]190
+    %2 : $(construct.154):I64 = FuncGraph::fg_189(%1)    #(Tuple[Func*3])    # fg_189=ms_len.189 #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]188
+    %3 : Bool = MultitypeFuncGraph::less{(Tensor, Number), (Number, Tensor), (Tensor, Tensor), (Number, Number)}(%para34, %2)    #(I64, I64) #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]193
+    %4 : Func = Primitive::Switch{prim_type=1}(%3, FuncGraph::fg_157, FuncGraph::fg_194)    #(Bool, Func, Func)    # fg_157=⥁construct.157, fg_194=↓construct.194 #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]195
+
+#------------------------> 6
+    %5 = %4() #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]196
+    Primitive::Return{prim_type=1}(%5)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]197
+}
+# order:
+#   1: ⤾construct.155:[CNode]193{[0]: ValueNode<MultitypeFuncGraph> less.56, [1]: @[CNode]156, [2]: [CNode]188}
+#   2: ⤾construct.155:[CNode]195{[0]: ValueNode<Primitive> Switch, [1]: [CNode]193, [2]: ValueNode<FuncGraph> ⥁construct.157, [3]: ValueNode<FuncGraph> ↓construct.194}
+#   3: ⤾construct.155:[CNode]196{[0]: [CNode]195}
+#   4: ⤾construct.155:[CNode]197{[0]: ValueNode<Primitive> Return, [1]: [CNode]196}
+
+
+# [No.8] ⥁construct.157
+# In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/
+funcgraph fg_157[fg_155](
+) {
+    %1 : I64 = MultitypeFuncGraph::add{(RowTensor, Tensor), (NoneType, NoneType), (Tensor, Tensor), (List, List), (Tuple, Tuple), (Tensor, List), (Tensor, Tuple), (List, Tensor), (Tuple, Tensor), (Tensor, Number), (Number, Tensor), (String, String), (Number, Number)}(%para34, I64(1))    #(I64, I64) #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]156
+    %2 : $(construct.154):Tuple[Func*3] = Primitive::MakeTuple{prim_type=1}(FuncGraph::fg_158, FuncGraph::fg_191, FuncGraph::fg_192)    #(Func, Func, Func)    # fg_158=construct.158, fg_191=construct.191, fg_192=construct.192 #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]190
+    %3 : Func = DoSignaturePrimitive::S-Prim-getitem{prim_type=1}(%2, %para34)    #(Tuple[Func*3], I64) #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#cell
+
+#------------------------> 7
+    %4 = %3(%para35)    #(Tensor(F32)[400]) #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(276)/            input_data = cell(input_data)/#input_data
+    %5 = FuncGraph::fg_155(%1, %4)    #(I64, Undefined)    # fg_155=⤾construct.155 #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]198
+    Primitive::Return{prim_type=1}(%5)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-SequentialCell
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#[CNode]199
+}
+# order:
+#   1: ⥁construct.157:cell{[0]: ValueNode<DoSignaturePrimitive> S-Prim-getitem, [1]: [CNode]190, [2]: @[CNode]156}
+#   2: ⥁construct.157:[CNode]156{[0]: ValueNode<MultitypeFuncGraph> add.59, [1]: @[CNode]156, [2]: ValueNode<Int64Imm> 1}
+#   3: ⥁construct.157:input_data{[0]: cell, [1]: Φinput_data}
+#   4: ⥁construct.157:[CNode]198{[0]: ValueNode<FuncGraph> ⤾construct.155, [1]: [CNode]156, [2]: input_data}
+#   5: ⥁construct.157:[CNode]199{[0]: ValueNode<Primitive> Return, [1]: [CNode]198}
+
+
+# [No.9] construct.158
+# In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(320)/    def construct(self, x):/
+funcgraph fg_158[fg_145](
+        %para36 : Tensor(F32)[400]    # x
+    ) {
+
+#------------------------> 8
+    %1 = FuncGraph::fg_159(%para36, %para4, %para3)    #(Tensor(F32)[400], Ref[Tensor(F32)][25], Ref[Tensor(F32)][25, 400])    # fg_159=L-construct.159 #scope: Default
+#[CNode]200
+    Primitive::Return{prim_type=1}(%1)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(323)/        if len(x_shape) != 2:/#[CNode]201
+}
+# order:
+#   1: construct.158:[CNode]200{[0]: ValueNode<FuncGraph> L-construct.159, [1]: x, [2]: 0.bias, [3]: 0.weight}
+#   2: construct.158:[CNode]201{[0]: ValueNode<Primitive> Return, [1]: [CNode]200}
+
+
+# [No.10] L-construct.159
+# In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(320)/    def construct(self, x):/
+funcgraph fg_159(
+        %para37 : Tensor(F32)[400]    # x
+        , %para38 : Ref[Tensor(F32)][25]    # L-0.bias
+        , %para39 : Ref[Tensor(F32)][25, 400]    # L-0.weight
+    ) {
+    %1 : Tuple[I64] = DoSignaturePrimitive::S-Prim-Shape{prim_type=1}(%para37)    #(Tensor(F32)[400]) #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(330)/        if len(x_shape) != 2:/#Φx_shape
+
+#------------------------> 9
+    %2 = DoSignaturePrimitive::S-Prim-check_dense_input_shape{prim_type=1}(%1, "Dense")    #(Tuple[I64], String) #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(322)/        check_dense_input_shape(x_shape, self.cls_name)/#202
+    %3 = Primitive::stop_gradient{prim_type=1}(%2)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#203
+    %4 = FuncGraph::fg_204(%1)    #(Tuple[I64])    # fg_204=L-ms_len.204 #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(323)/        if len(x_shape) != 2:/#205
+    %5 = DoSignaturePrimitive::S-Prim-not_equal{prim_type=1}(%4, I64(2))    #(Undefined, Undefined) #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(323)/        if len(x_shape) != 2:/#206
+    %6 = FuncGraph::fg_207(%5)    #(Undefined)    # fg_207=L-bool_.207 #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(323)/        if len(x_shape) != 2:/#208
+    %7 = Primitive::Switch{prim_type=1}(%6, FuncGraph::fg_209, FuncGraph::fg_210)    #(Undefined, Undefined, Undefined)    # fg_209=L-✓construct.209, fg_210=L-✗construct.210 #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(323)/        if len(x_shape) != 2:/#211
+    %8 = %7() #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(323)/        if len(x_shape) != 2:/#212
+    %9 = Primitive::Depend{prim_type=1}[side_effect_propagate=I64(1)](%8, %3)    #(Undefined, Undefined) #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/container.py(275)/        for cell in self.cell_list:/#213
+    Primitive::Return{prim_type=1}(%9)    #(Undefined) #scope: Default/network-WithLossCell/_backbone-SequentialCell/0-Dense
+      # In file /home/ma-user/anaconda3/envs/MindSpore/lib/python3.7/site-packages/mindspore/nn/layer/basic.py(323)/        if len(x_shape) != 2:/#[CNode]201
+}
+# order:
+#   1: L-construct.159:Φx_shape{[0]: ValueNode<DoSignaturePrimitive> S-Prim-Shape, [1]: x}
+#   2: L-construct.159:202{[0]: ValueNode<DoSignaturePrimitive> S-Prim-check_dense_input_shape, [1]: Φx_shape, [2]: ValueNode<StringImm> Dense}
+#   3: L-construct.159:205{[0]: ValueNode<FuncGraph> L-ms_len.204, [1]: Φx_shape}
+#   4: L-construct.159:206{[0]: ValueNode<DoSignaturePrimitive> S-Prim-not_equal, [1]: 205, [2]: ValueNode<Int64Imm> 2}
+#   5: L-construct.159:208{[0]: ValueNode<FuncGraph> L-bool_.207, [1]: 206}
+#   6: L-construct.159:211{[0]: ValueNode<Primitive> Switch, [1]: 208, [2]: ValueNode<FuncGraph> L-✓construct.209, [3]: ValueNode<FuncGraph> L-✗construct.210}
+#   7: L-construct.159:212{[0]: 211}
+#   8: L-construct.159:[CNode]201{[0]: ValueNode<Primitive> Return, [1]: 213}
+
+
+#===============================================================================
+# num of function graphs in stack: 10/11 (Ignored 1 internal frames).
